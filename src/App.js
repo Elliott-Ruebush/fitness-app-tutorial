@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import { Header, Footer } from './Components/Layouts';
-import Exercises from './Components/Exercises';
+import Exercises from './Components/Exercises/Exercises';
 import { muscles, exercises } from './store.js';
 
 
@@ -9,7 +9,8 @@ export default class extends Component {
 //TODO: Refactor with hooks
   state = {
     exercises,
-    exercise: {}
+    exercise: {},
+    editMode: false
   }
 
   getExercisesByMuscles() {
@@ -44,7 +45,7 @@ export default class extends Component {
     }))
   }
 
-  handleExCreate = (exercise) => {
+  handleExSubmit = (exercise) => {
     console.log(exercise);
     this.setState(({ exercises }) => ({
       exercises: [
@@ -60,6 +61,24 @@ export default class extends Component {
     }))
   }
 
+  handleEditSelect = (id) => {
+    console.log("Edit button pressed");
+    console.log("Editmode: " + this.state.editMode)
+      this.setState(({ exercises }) => ({
+        exercise: exercises.find(ex => (ex.id === id)),
+        editMode: true
+      }))
+  }
+
+  handleExEdit = (exercise) => {
+    this.setState(({exercises}) => ({
+      exercises: {
+        ...exercises.filter(ex => ex.id !== exercise.id),
+        exercise
+      }
+    }))
+  }
+
   render() {
     const exercises = this.getExercisesByMuscles()
     const { category, exercise } = this.state;
@@ -67,15 +86,18 @@ export default class extends Component {
       <Fragment>
         <Header 
         muscles={muscles}
-        onExCreate={this.handleExCreate}
+        onCreate={this.handleExSubmit}
         />
 
         <Exercises
           exercise={exercise}
           category={category}
           exercises={exercises}
+          editMode={this.state.editMode}
+          onEdit={this.handleExEdit}
           onSelect={this.handleExSelected}
           onDelete={this.handleExDelete}
+          onSelectEdit={this.handleEditSelect}
         />
 
         <Footer

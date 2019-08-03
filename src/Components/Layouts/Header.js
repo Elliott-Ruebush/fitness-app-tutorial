@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import CreateDialog from '../Exercises/Dialogs/Create';
+import CreateDialog from '../Exercises/Dialog';
 
-export default function makeHeader({ muscles, onExCreate }) {
+export default function makeHeader({ muscles, onCreate }) {
   return (
     <AppBar position="static">
       <Toolbar>
@@ -13,8 +13,8 @@ export default function makeHeader({ muscles, onExCreate }) {
           Exercise Database
       </Typography>
         <CreateDialog
-          onCreate={onExCreate}
-          muscleList={muscles}
+          onCreate={onCreate}
+          // muscleList={muscles}
         />
       </Toolbar>
     </AppBar>

@@ -7,36 +7,48 @@ import {
     ListItem,
     ListItemText,
     ListItemSecondaryAction,
-    IconButton
+    IconButton,
+    makeStyles
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Create';
+import ExerciseForm from './ExerciseForm';
+import { getThemeProps } from '@material-ui/styles';
 
 
-const styles = {
-    Paper: {
+const useStyles = makeStyles(theme => ({
+    paperStyle: {
         padding: 20,
         marginTop: 10,
         marginBottom: 10,
         height: 500,
         overflowY: 'auto'
+    },
+    secondaryButtons: {
+        marginRight: '5px'
     }
-}
+}));
 
-export default ({
+export default function Exercises({
     exercises,
     category,
     onSelect,
+    exercise,
     exercise: {
         id,
         title = 'Welcome: ',
         description = 'Select an exercise to learn more!'
     },
-    onDelete
-}) =>
-    (
+    onDelete,
+    onSelectEdit,
+    editMode,
+    onEdit
+}) {
+    const classes = useStyles();
+    return (
         <Grid container>
             <Grid item sm>
-                <Paper style={styles.Paper}>
+                <Paper className={classes.paperStyle}>
                     {exercises.map(([group, exercises]) =>
                         (!category || category === group)
                             ? <Fragment key={group}>
@@ -58,7 +70,16 @@ export default ({
                                                 <IconButton
                                                     edge='end'
                                                     aria-label='delete'
-                                                    onClick={() => onDelete(id) }
+                                                    onClick={() => onSelectEdit(id)}
+                                                    className={classes.secondaryButtons}
+                                                >
+                                                    <EditIcon />
+                                                </IconButton>
+                                                <IconButton
+                                                    edge='end'
+                                                    aria-label='delete'
+                                                    onClick={() => onDelete(id)}
+                                                    className={classes.secondaryButtons}
                                                 >
                                                     <DeleteIcon />
                                                 </IconButton>
@@ -72,18 +93,26 @@ export default ({
                 </Paper>
             </Grid>
             <Grid item sm>
-                <Paper style={styles.Paper}>
-
-                    <Typography
-                        variant='h3'>
-                        {title}
-                    </Typography>
-                    <Typography
-                        variant='body1'
-                        style={{ marginTop: 20 }}>
-                        {description}
-                    </Typography>
+                <Paper className={classes.paperStyle}>
+                    {editMode
+                        ? <ExerciseForm 
+                            onSubmit={onEdit}
+                            exercise={exercise}
+                        />
+                        : <Fragment>
+                            <Typography
+                                variant='h3'>
+                                {title}
+                            </Typography>
+                            <Typography
+                                variant='body1'
+                                style={{ marginTop: 20 }}>
+                                {description}
+                            </Typography>
+                        </Fragment>
+                    }
                 </Paper>
             </Grid>
         </Grid>
     )
+}
