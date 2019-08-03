@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { getThemeProps } from '@material-ui/styles';
+import { blockStatement } from '@babel/types';
 
 
 // TODO: Bring in the muscles list from App.js instead of recreating the same list in the Create component
@@ -37,11 +38,17 @@ const useStyles = makeStyles(theme => ({
     },
     menu: {
         width: 200
+    },
+    add_button: {
+        display: 'block',
+        width: 500,
+        color: 'white',
+        backgroundColor: '#3F51B5'
     }
 }));
 
 
-export default function ExerciseForm({ onSubmit, exercise }) {
+export default function ExerciseForm({ onSubmit, exercise, buttonText }) {
     const classes = useStyles();
     const getInitState = () => {
         return exercise ? exercise : {
@@ -53,6 +60,11 @@ export default function ExerciseForm({ onSubmit, exercise }) {
     //To fix the error of exercise not updating, possibly just 
     const [newEx, setNewEx] = React.useState(getInitState)
 
+    React.useEffect(() => {
+        setNewEx({ ...exercise });
+        console.log("use effect exercise: " + exercise);
+    }, [exercise]);
+
     const handleChange = name => event => {
         setNewEx({ ...newEx, [name]: event.target.value });
     }
@@ -60,17 +72,12 @@ export default function ExerciseForm({ onSubmit, exercise }) {
     const handleSubmit = () => {
         //TODO: validation
         onSubmit({
-            ...newEx,
-            id: newEx.title.toLowerCase().replace(/ /g, '-')
+            id: newEx.title.toLowerCase().replace(/ /g, '-'),
+            ...newEx
         });
         // console.log(newEx);
         // setOpen(false);
-        setNewEx({
-            'id': '',
-            title: '',
-            description: '',
-            muscles: ''
-        });
+        setNewEx(getInitState);
     }
 
     return (
@@ -114,10 +121,15 @@ export default function ExerciseForm({ onSubmit, exercise }) {
                 onChange={handleChange('description')}
                 margin="normal"
             />
-            <br />
-            <Button onClick={handleSubmit} color="inherit">
-                Add
+
+            <Button
+                onClick={handleSubmit}
+                color="primary"
+                className={classes.add_button}
+            >
+                {buttonText ? buttonText : "Add"}
             </Button>
+
         </form>
     )
 

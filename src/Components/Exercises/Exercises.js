@@ -98,6 +98,7 @@ export default function Exercises({
                         ? <ExerciseForm 
                             onSubmit={onEdit}
                             exercise={exercise}
+                            buttonText={'Edit'}
                         />
                         : <Fragment>
                             <Typography

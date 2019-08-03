@@ -4,7 +4,8 @@ import { Header, Footer } from './Components/Layouts';
 import Exercises from './Components/Exercises/Exercises';
 import { muscles, exercises } from './store.js';
 
-
+console.log(typeof(exercises));
+console.log(exercises)
 export default class extends Component {
 //TODO: Refactor with hooks
   state = {
@@ -18,17 +19,19 @@ export default class extends Component {
       ...exercises,
       [category]: []
     }), {})
-
+    console.log('Hello from getExercisesByMuscles');
     console.log(muscles, initExercises);
-
+    console.log(typeof(this.state.exercises));
+    console.log(this.state.exercises);
+  
     return Object.entries(
-      this.state.exercises.reduce((exercises, exercise) => {
+      this.state.exercises.reduce(((exercises, exercise) => {
         const { muscles } = exercise;
 
         exercises[muscles] = [...exercises[muscles], exercise];
 
         return exercises;
-      }, initExercises)
+      }), initExercises)
     )
   }
 
