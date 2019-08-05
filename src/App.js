@@ -40,7 +40,8 @@ export default class extends Component {
   handleExSelected = id => {
     // console.log('Reached here?')
     this.setState(({ exercises }) => ({
-      exercise: exercises.find(ex => (ex.id === id))
+      exercise: exercises.find(ex => (ex.id === id)),
+      editMode: false
     }))
   }
 
@@ -56,7 +57,9 @@ export default class extends Component {
 
   handleExDelete = (id) => {
     this.setState(({ exercises }) => ({
-      exercises: exercises.filter(ex => ex.id !== id)
+      exercises: exercises.filter(ex => ex.id !== id),
+      editMode: false,
+      exercise: {}
     }))
   }
 

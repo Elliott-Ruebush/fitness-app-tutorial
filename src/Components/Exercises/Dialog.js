@@ -31,6 +31,11 @@ export default function FormDialog(/*muscleList,*/{ onCreate }) {
         setOpen(false);
     }
 
+    function handleFormSubmit(exercise) {
+        handleClose();
+        onCreate(exercise);
+    }
+
 
 
     return (
@@ -51,7 +56,7 @@ export default function FormDialog(/*muscleList,*/{ onCreate }) {
                     </DialogContentText>
                     <ExerciseForm
                         // muscleList={muscles}
-                        onSubmit={onCreate}
+                        onSubmit={handleFormSubmit}
                     />
                 </DialogContent>
             </Dialog>
