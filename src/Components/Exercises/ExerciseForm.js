@@ -57,12 +57,11 @@ export default function ExerciseForm({ onSubmit, exercise, buttonText }) {
             muscles: ''
         }
     }
-    //To fix the error of exercise not updating, possibly just 
     const [newEx, setNewEx] = React.useState(getInitState)
 
+    //Makes the exercise update when you change which one you are editing (Your exercise prop changes).
     React.useEffect(() => {
         setNewEx({ ...exercise });
-        console.log("use effect exercise: " + exercise);
     }, [exercise]);
 
     const handleChange = name => event => {
@@ -71,10 +70,15 @@ export default function ExerciseForm({ onSubmit, exercise, buttonText }) {
 
     const handleSubmit = () => {
         //TODO: validation
-        onSubmit({
+        const exToSubmit = {
             id: newEx.title.toLowerCase().replace(/ /g, '-'),
             ...newEx
-        });
+        }
+        console.log("ExtoSubmit");
+        console.log(exToSubmit);
+        console.log('Done exToSubmit')
+
+        onSubmit(exToSubmit);
         // console.log(newEx);
         // setOpen(false);
         setNewEx(getInitState);

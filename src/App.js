@@ -3,9 +3,9 @@ import './App.css';
 import { Header, Footer } from './Components/Layouts';
 import Exercises from './Components/Exercises/Exercises';
 import { muscles, exercises } from './store.js';
+import { object } from 'prop-types';
 
-console.log(typeof(exercises));
-console.log(exercises)
+
 export default class extends Component {
 //TODO: Refactor with hooks
   state = {
@@ -19,14 +19,10 @@ export default class extends Component {
       ...exercises,
       [category]: []
     }), {})
-    console.log('Hello from getExercisesByMuscles');
-    console.log(muscles, initExercises);
-    console.log(typeof(this.state.exercises));
-    console.log(this.state.exercises);
-  
     return Object.entries(
       this.state.exercises.reduce(((exercises, exercise) => {
         const { muscles } = exercise;
+        console.log(exercise)
 
         exercises[muscles] = [...exercises[muscles], exercise];
 
@@ -75,15 +71,18 @@ export default class extends Component {
 
   handleExEdit = (exercise) => {
     this.setState(({exercises}) => ({
-      exercises: {
+      exercises: [
         ...exercises.filter(ex => ex.id !== exercise.id),
         exercise
-      }
+      ], 
+      exercise
     }))
   }
 
   render() {
-    const exercises = this.getExercisesByMuscles()
+    const exercises = this.getExercisesByMuscles();
+    console.log(exercises);
+    console.log(typeof(exercises))
     const { category, exercise } = this.state;
     return (
       <Fragment>

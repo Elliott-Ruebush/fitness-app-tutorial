@@ -69,7 +69,7 @@ export default function Exercises({
                                             <ListItemSecondaryAction>
                                                 <IconButton
                                                     edge='end'
-                                                    aria-label='delete'
+                                                    aria-label='edit'
                                                     onClick={() => onSelectEdit(id)}
                                                     className={classes.secondaryButtons}
                                                 >

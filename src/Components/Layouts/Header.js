@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import CreateDialog from '../Exercises/Dialog';
 
-export default function makeHeader({ muscles, onCreate }) {
+export default function makeHeader({ onCreate }) {
   return (
     <AppBar position="static">
       <Toolbar>
