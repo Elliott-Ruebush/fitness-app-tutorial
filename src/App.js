@@ -4,10 +4,11 @@ import { Header, Footer } from './Components/Layouts';
 import Exercises from './Components/Exercises/Exercises';
 import { muscles, exercises } from './store.js';
 import { object } from 'prop-types';
+import { CssBaseline } from '@material-ui/core';
 
 
 export default class extends Component {
-//TODO: Refactor with hooks
+  //TODO: Refactor with hooks
   state = {
     exercises,
     exercise: {},
@@ -49,7 +50,7 @@ export default class extends Component {
     console.log(exercise);
     this.setState(({ exercises }) => ({
       exercises: [
-        ...exercises, 
+        ...exercises,
         exercise
       ]
     }));
@@ -66,18 +67,18 @@ export default class extends Component {
   handleEditSelect = (id) => {
     console.log("Edit button pressed");
     console.log("Editmode: " + this.state.editMode)
-      this.setState(({ exercises }) => ({
-        exercise: exercises.find(ex => (ex.id === id)),
-        editMode: true
-      }))
+    this.setState(({ exercises }) => ({
+      exercise: exercises.find(ex => (ex.id === id)),
+      editMode: true
+    }))
   }
 
   handleExEdit = (exercise) => {
-    this.setState(({exercises}) => ({
+    this.setState(({ exercises }) => ({
       exercises: [
         ...exercises.filter(ex => ex.id !== exercise.id),
         exercise
-      ], 
+      ],
       exercise
     }))
   }
@@ -85,31 +86,32 @@ export default class extends Component {
   render() {
     const exercises = this.getExercisesByMuscles();
     console.log(exercises);
-    console.log(typeof(exercises))
+    console.log(typeof (exercises))
     const { category, exercise } = this.state;
     return (
       <Fragment>
-        <Header 
-        muscles={muscles}
-        onCreate={this.handleExSubmit}
-        />
+        <CssBaseline />
+          <Header
+            muscles={muscles}
+            onCreate={this.handleExSubmit}
+          />
 
-        <Exercises
-          exercise={exercise}
-          category={category}
-          exercises={exercises}
-          editMode={this.state.editMode}
-          onEdit={this.handleExEdit}
-          onSelect={this.handleExSelected}
-          onDelete={this.handleExDelete}
-          onSelectEdit={this.handleEditSelect}
-        />
+          <Exercises
+            exercise={exercise}
+            category={category}
+            exercises={exercises}
+            editMode={this.state.editMode}
+            onEdit={this.handleExEdit}
+            onSelect={this.handleExSelected}
+            onDelete={this.handleExDelete}
+            onSelectEdit={this.handleEditSelect}
+          />
 
-        <Footer
-          category= {category}
-          muscles={muscles}
-          onSelect={ this.handleCatSelected}
-        />
+          <Footer
+            category={category}
+            muscles={muscles}
+            onSelect={this.handleCatSelected}
+          />
       </Fragment>
     )
   };

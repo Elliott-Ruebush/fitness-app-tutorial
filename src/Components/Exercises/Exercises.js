@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     paperStyle: {
         padding: 20,
         marginTop: 10,
-        marginBottom: 10,
+        // marginBottom: 10, NO LONGER NEED DUE TO THE ADDITION OF CSS BASELINE 
         height: 500,
         overflowY: 'auto'
     },
@@ -47,7 +47,7 @@ export default function Exercises({
     const classes = useStyles();
     return (
         <Grid container>
-            <Grid item sm>
+            <Grid item xs={12} sm={6}>
                 <Paper className={classes.paperStyle}>
                     {exercises.map(([group, exercises]) =>
                         (!category || category === group)
@@ -92,7 +92,7 @@ export default function Exercises({
                     )}
                 </Paper>
             </Grid>
-            <Grid item sm>
+            <Grid item xs={12} sm={6}>
                 <Paper className={classes.paperStyle}>
                     {editMode
                         ? <ExerciseForm 
