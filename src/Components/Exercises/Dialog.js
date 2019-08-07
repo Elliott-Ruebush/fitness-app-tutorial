@@ -48,7 +48,13 @@ export default function FormDialog(/*muscleList,*/{ onCreate }) {
             >
                 <AddIcon />
             </Fab>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="form-dialog-title"
+                fullWidth
+                maxWidth='sm'
+            >
                 <DialogTitle id="form-dialog-title">Create New Exercise</DialogTitle>
                 <DialogContent>
                     <DialogContentText>

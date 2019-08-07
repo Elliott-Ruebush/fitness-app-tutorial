@@ -27,21 +27,22 @@ const muscleList = [
 ];
 
 const useStyles = makeStyles(theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap'
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: 500
-    },
-    menu: {
-        width: 200
-    },
+    // container: {
+    //     display: 'flex',
+    //     flexWrap: 'wrap',
+    //     width: 250
+    // },
+    // textField: {
+    //     marginLeft: theme.spacing(1),
+    //     marginRight: theme.spacing(1),
+    //     width: 500
+    // },
+    // menu: {
+    //     width: 200
+    // },
     add_button: {
         display: 'block',
-        width: 500,
+        width: '100%', 
         color: 'white',
         backgroundColor: '#3F51B5'
     }
@@ -69,14 +70,11 @@ export default function ExerciseForm({ onSubmit, exercise, buttonText }) {
     }
 
     const handleSubmit = () => {
-        //TODO: validation
+        //TODO: validation - DONE, PASSED DISABLED PROPS TO SUBMIT BUTTON IF NO TITLE OR NO MUSCLE
         const exToSubmit = {
             id: newEx.title.toLowerCase().replace(/ /g, '-'),
             ...newEx
         }
-        console.log("ExtoSubmit");
-        console.log(exToSubmit);
-        console.log('Done exToSubmit')
 
         onSubmit(exToSubmit);
         // console.log(newEx);
@@ -85,22 +83,22 @@ export default function ExerciseForm({ onSubmit, exercise, buttonText }) {
     }
 
     return (
-        <form className={classes.container} noValidate autoComplete='off'>
+        <form autoComplete='off'>
             <TextField
                 id="set-title"
                 label="Exercise Title"
-                className={classes.textField}
                 value={newEx.title}
                 onChange={handleChange('title')}
                 margin="normal"
+                fullWidth
             />
             <TextField
                 id="select-category"
                 select
                 label="Select Muscle"
-                className={classes.textField}
                 value={newEx.muscles}
                 onChange={handleChange('muscles')}
+                fullWidth
                 // SelectProps={{
                 //     MenuProps: {
                 //         className: classes.menu,
@@ -119,7 +117,7 @@ export default function ExerciseForm({ onSubmit, exercise, buttonText }) {
                 id="set-desc"
                 multiline
                 rows="3"
-                className={classes.textField}
+                fullWidth
                 label="Exercise Description"
                 value={newEx.description}
                 onChange={handleChange('description')}
@@ -130,6 +128,7 @@ export default function ExerciseForm({ onSubmit, exercise, buttonText }) {
                 onClick={handleSubmit}
                 color="primary"
                 className={classes.add_button}
+                disabled={!newEx.muscles || !newEx.title}
             >
                 {buttonText ? buttonText : "Add"}
             </Button>

@@ -19,7 +19,7 @@ import { getThemeProps } from '@material-ui/styles';
 const useStyles = makeStyles(theme => ({
     paperStyle: {
         padding: 20,
-        marginTop: 10,
+        marginTop: 5,
         // marginBottom: 10, NO LONGER NEED DUE TO THE ADDITION OF CSS BASELINE 
         height: 500,
         overflowY: 'auto'
@@ -94,23 +94,22 @@ export default function Exercises({
             </Grid>
             <Grid item xs={12} sm={6}>
                 <Paper className={classes.paperStyle}>
+                    <Typography
+                        variant='h3'
+                        gutterBottom
+                    >
+                        {title}
+                    </Typography>
                     {editMode
-                        ? <ExerciseForm 
+                        ? <ExerciseForm
                             onSubmit={onEdit}
                             exercise={exercise}
                             buttonText={'Edit'}
                         />
-                        : <Fragment>
-                            <Typography
-                                variant='h3'>
-                                {title}
-                            </Typography>
-                            <Typography
-                                variant='body1'
-                                style={{ marginTop: 20 }}>
-                                {description}
-                            </Typography>
-                        </Fragment>
+                        : <Typography
+                            variant='body1'>
+                            {description}
+                        </Typography>
                     }
                 </Paper>
             </Grid>
