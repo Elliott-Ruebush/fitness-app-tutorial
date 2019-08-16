@@ -41,7 +41,7 @@ export default function FormDialog(/*muscleList,*/{ onCreate }) {
     return (
         <Fragment>
             <Fab
-                // color="white"
+                color='secondary'
                 aria-label="add"
                 size="large"
                 onClick={handleClickOpen}

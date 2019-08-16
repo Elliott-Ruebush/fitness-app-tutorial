@@ -55,6 +55,7 @@ export default function Exercises({
                                 <Typography
                                     variant='h6'
                                     style={{ textTransform: 'capitalize' }}
+                                    color='secondary'
                                 >
                                     {group}
                                 </Typography>
@@ -69,6 +70,7 @@ export default function Exercises({
                                             <ListItemSecondaryAction>
                                                 <IconButton
                                                     edge='end'
+                                                    color='primary'
                                                     aria-label='edit'
                                                     onClick={() => onSelectEdit(id)}
                                                     className={classes.secondaryButtons}
@@ -77,6 +79,7 @@ export default function Exercises({
                                                 </IconButton>
                                                 <IconButton
                                                     edge='end'
+                                                    color='primary'
                                                     aria-label='delete'
                                                     onClick={() => onDelete(id)}
                                                     className={classes.secondaryButtons}
@@ -97,6 +100,7 @@ export default function Exercises({
                     <Typography
                         variant='h3'
                         gutterBottom
+                        color="secondary"
                     >
                         {title}
                     </Typography>

@@ -15,6 +15,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import { getThemeProps } from '@material-ui/styles';
 import { blockStatement } from '@babel/types';
+import { amber } from '@material-ui/core/colors';
 
 
 // TODO: Bring in the muscles list from App.js instead of recreating the same list in the Create component
@@ -43,8 +44,8 @@ const useStyles = makeStyles(theme => ({
     add_button: {
         display: 'block',
         width: '100%', 
-        color: 'white',
-        backgroundColor: '#3F51B5'
+        color: '#000000',
+        backgroundColor: amber[600]
     }
 }));
 
@@ -126,7 +127,6 @@ export default function ExerciseForm({ onSubmit, exercise, buttonText }) {
 
             <Button
                 onClick={handleSubmit}
-                color="primary"
                 className={classes.add_button}
                 disabled={!newEx.muscles || !newEx.title}
             >

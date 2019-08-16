@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core';
 import CreateDialog from '../Exercises/Dialog';
 
-export default function makeHeader({ onCreate }) {
+const useStyles = makeStyles(theme => ({
+  flex: {
+    flex: 1
+  }
+}));
+
+export default function MyHeader({ onCreate }) {
+  const classes =  useStyles();
+
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography
           variant="h2"
           color="inherit"
-          style={{ padding: 10, flex: 1 }}>
+          className={classes.flex}
+         >
           Exercise Database
       </Typography>
         <CreateDialog
