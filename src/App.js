@@ -5,6 +5,7 @@ import Exercises from './Components/Exercises/Exercises';
 import { muscles, exercises } from './store.js';
 import { object } from 'prop-types';
 import { CssBaseline } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 
 export default class extends Component {
@@ -91,27 +92,27 @@ export default class extends Component {
     return (
       <Fragment>
         <CssBaseline />
-          <Header
-            muscles={muscles}
-            onCreate={this.handleExSubmit}
-          />
+        <Header
+          muscles={muscles}
+          onCreate={this.handleExSubmit}
+        />
 
-          <Exercises
-            exercise={exercise}
-            category={category}
-            exercises={exercises}
-            editMode={this.state.editMode}
-            onEdit={this.handleExEdit}
-            onSelect={this.handleExSelected}
-            onDelete={this.handleExDelete}
-            onSelectEdit={this.handleEditSelect}
-          />
+        <Exercises
+          exercise={exercise}
+          category={category}
+          exercises={exercises}
+          editMode={this.state.editMode}
+          onEdit={this.handleExEdit}
+          onSelect={this.handleExSelected}
+          onDelete={this.handleExDelete}
+          onSelectEdit={this.handleEditSelect}
+        />
 
-          <Footer
-            category={category}
-            muscles={muscles}
-            onSelect={this.handleCatSelected}
-          />
+        <Footer
+          category={category}
+          muscles={muscles}
+          onSelect={this.handleCatSelected}
+        />
       </Fragment>
     )
   };

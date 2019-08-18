@@ -9,21 +9,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function MyHeader({ onCreate }) {
-  const classes =  useStyles();
+  const classes = useStyles();
 
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography
-          variant="h2"
+          variant='h4'
           color="inherit"
           className={classes.flex}
-         >
+        >
           Exercise Database
       </Typography>
         <CreateDialog
           onCreate={onCreate}
-          // muscleList={muscles}
+        // muscleList={muscles}
         />
       </Toolbar>
     </AppBar>

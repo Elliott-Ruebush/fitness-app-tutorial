@@ -19,7 +19,8 @@ const theme = createMuiTheme({
             dark: amber[200]
         },
         type: "dark"
-    }
+    },
+    spacing: 9
 });
 
 console.log(theme);

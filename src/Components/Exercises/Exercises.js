@@ -13,20 +13,43 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Create';
 import ExerciseForm from './ExerciseForm';
-import { getThemeProps } from '@material-ui/styles';
 
 
 const useStyles = makeStyles(theme => ({
     paperStyle: {
-        padding: 20,
-        marginTop: 5,
-        // marginBottom: 10, NO LONGER NEED DUE TO THE ADDITION OF CSS BASELINE 
-        height: 500,
+        padding: theme.spacing(2),
+        // marginBottom: 10, NO LONGER NEED DUE TO THE ADDITION OF CSSBASELINE 
+        [theme.breakpoints.up('sm')]: {
+            marginTop: 5,
+            height: 'calc(100% - 10px)'
+        },
+        [theme.breakpoints.down('xs')]: {
+            height: '100%'
+        },
         overflowY: 'auto'
     },
     secondaryButtons: {
         marginRight: '5px'
+    },
+    '@global': {
+        'html, body, #root': {
+            height: '100vh'
+        }
+    },
+    container: {
+        [theme.breakpoints.up('sm')]: {
+            height: 'calc(100% - 64px - 48px)'
+        },
+        [theme.breakpoints.down('xs')]: {
+            height: 'calc(100% - 56px - 48px)'
+        }
+    },
+    item: {
+        [theme.breakpoints.down('xs')]: {
+            height: '50%'
+        }
     }
+
 }));
 
 export default function Exercises({
@@ -46,8 +69,8 @@ export default function Exercises({
 }) {
     const classes = useStyles();
     return (
-        <Grid container>
-            <Grid item xs={12} sm={6}>
+        <Grid container className={classes.container}>
+            <Grid item xs={12} sm={6} className={classes.item}>
                 <Paper className={classes.paperStyle}>
                     {exercises.map(([group, exercises]) =>
                         (!category || category === group)
@@ -95,7 +118,7 @@ export default function Exercises({
                     )}
                 </Paper>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} className={classes.item}>
                 <Paper className={classes.paperStyle}>
                     <Typography
                         variant='h3'

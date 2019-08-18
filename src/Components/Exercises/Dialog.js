@@ -43,7 +43,7 @@ export default function FormDialog(/*muscleList,*/{ onCreate }) {
             <Fab
                 color='secondary'
                 aria-label="add"
-                size="large"
+                size="medium"
                 onClick={handleClickOpen}
             >
                 <AddIcon />
